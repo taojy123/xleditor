@@ -10,10 +10,10 @@ except ImportError:
 USE_MMAP = MMAP_AVAILABLE
 
 
-VERSION = '0.91'
+VERSION = '0.92'
 
 
-class XBook:
+class XBook(object):
     def __init__(self, r_book, w_book):
         self.r_book = r_book
         self.w_book = w_book
@@ -52,6 +52,14 @@ class XSheet(object):
         self.r_sheet = r_sheet
         self.w_sheet = w_sheet
 
+    @property
+    def nrows(self):
+        return self.r_sheet.nrows
+
+    @property
+    def ncols(self):
+        return self.r_sheet.ncols
+
     def get_value(self, i, j):
         try:
             return self.r_sheet.cell(i, j).value
@@ -61,9 +69,15 @@ class XSheet(object):
     def cell(self, i, j):
         return self.r_sheet.cell(i, j)
 
+    def row_values(self, colx, start_rowx=0, end_rowx=None):
+        return self.r_sheet.row_values(colx, start_rowx=0, end_rowx=None)
+
+    def col_values(self, colx, start_rowx=0, end_rowx=None):
+        return self.r_sheet.col_values(colx, start_rowx=0, end_rowx=None)
+
     def write(self, i, j, *args, **kwargs):
 
-        keep_style = kwargs.pop('kwargs', True)
+        keep_style = kwargs.pop('keep_style', True)
 
         row = self.w_sheet._Worksheet__rows.get(i)
         cell = row._Row__cells.get(j)
@@ -77,9 +91,13 @@ class XSheet(object):
             cell.xf_idx = xf_idx
 
 
+
+
 def open_workbook(filename=None, logfile=sys.stdout, verbosity=0, use_mmap=USE_MMAP,
                   file_contents=None, encoding_override=None, formatting_info=True,
                   on_demand=False, ragged_rows=False):
+    if 'xlsx' in filename:
+        formatting_info = False
     r_book = xlrd.open_workbook(
         filename=filename,
         logfile=logfile,
@@ -96,4 +114,5 @@ def open_workbook(filename=None, logfile=sys.stdout, verbosity=0, use_mmap=USE_M
     book = XBook(r_book, w_book)
 
     return book
+
 
