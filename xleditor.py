@@ -10,7 +10,24 @@ except ImportError:
 USE_MMAP = MMAP_AVAILABLE
 
 
-VERSION = '0.92'
+VERSION = '0.10.0'
+
+
+# ======================================
+# NEED TO FIX !!!
+# ==> xlwt.UnicodeUtils.upack2 
+# change as follow:
+# def upack2(s, encoding='ascii'):
+#     # If not unicode, make it so.
+
+#     if isinstance(s, unicode_type):
+#         us = s
+#     elif s:
+#         us = unicode(s, encoding)
+#     else:
+#         us = u''
+#     ...
+# ======================================
 
 
 class XBook(object):
@@ -79,9 +96,13 @@ class XSheet(object):
 
         keep_style = kwargs.pop('keep_style', True)
 
-        row = self.w_sheet._Worksheet__rows.get(i)
-        cell = row._Row__cells.get(j)
-        xf_idx = cell.xf_idx
+        if keep_style:
+            row = self.w_sheet._Worksheet__rows.get(i)
+            if row:
+                cell = row._Row__cells.get(j)
+                xf_idx = cell.xf_idx
+            else:
+                keep_style = False
 
         self.w_sheet.write(i, j, *args, **kwargs)
 
