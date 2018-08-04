@@ -10,7 +10,7 @@ except ImportError:
 USE_MMAP = MMAP_AVAILABLE
 
 
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 
 
 # ======================================
@@ -96,13 +96,12 @@ class XSheet(object):
 
         keep_style = kwargs.pop('keep_style', True)
 
-        if keep_style:
+        try:
             row = self.w_sheet._Worksheet__rows.get(i)
-            if row:
-                cell = row._Row__cells.get(j)
-                xf_idx = cell.xf_idx
-            else:
-                keep_style = False
+            cell = row._Row__cells.get(j)
+            xf_idx = cell.xf_idx
+        except Exception as e:
+            keep_style = False
 
         self.w_sheet.write(i, j, *args, **kwargs)
 
