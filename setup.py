@@ -1,11 +1,15 @@
 
 from setuptools import setup
-import xleditor
+
+try:
+    from xleditor import VERSION
+except Exception as e:
+    VERSION = ''
 
 
 setup(
     name='xleditor',
-    version=xleditor.VERSION,
+    version=VERSION,
     description='Easy to open xls/xlsx file and edit it (merge xlrd and xlutils)',
     long_description=open('README.md').read(),
     author='TaoJY',
