@@ -1,6 +1,8 @@
 # xleditor
 打开并在原有基础上编辑 xls / xlsx 文档
 
+[![PyPI Downloads](https://pypistats.com/badge/xleditor.png)](https://pypistats.com/package/xleditor)
+
 
 Useage:
 
