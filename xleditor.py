@@ -10,9 +10,6 @@ except ImportError:
 USE_MMAP = MMAP_AVAILABLE
 
 
-VERSION = '1.0.2'
-
-
 # ======================================
 # NEED TO FIX !!!
 # ==> xlwt.UnicodeUtils.upack2 
