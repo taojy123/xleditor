@@ -11,7 +11,7 @@ VERSION 应该在这里定义
 # except Exception as e:
 #     VERSION = ''
 
-VERSION = '1.0.2'
+VERSION = '1.0.3'
 
 setup(
     name='xleditor',
