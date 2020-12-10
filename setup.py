@@ -1,11 +1,17 @@
 
 from setuptools import setup
 
-try:
-    from xleditor import VERSION
-except Exception as e:
-    VERSION = ''
+""" 
+从 xleditor import VERSION 可能因为其他代码导致错误, 比如因为安装顺序的关系, xlrd 还没有安装好, 
+这时候 xleditor 还不能正常使用但是 setup 应该不被影响
+VERSION 应该在这里定义
+"""
+# try:
+#     from xleditor import VERSION
+# except Exception as e:
+#     VERSION = ''
 
+VERSION = '1.0.2'
 
 setup(
     name='xleditor',
