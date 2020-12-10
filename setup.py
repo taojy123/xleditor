@@ -6,18 +6,15 @@ from setuptools import setup
 这时候 xleditor 还不能正常使用但是 setup 应该不被影响
 VERSION 应该在这里定义
 """
-# try:
-#     from xleditor import VERSION
-# except Exception as e:
-#     VERSION = ''
 
 VERSION = '1.0.3'
 
 setup(
     name='xleditor',
     version=VERSION,
-    description='Easy to open xls/xlsx file and edit it (merge xlrd and xlutils)',
-    long_description=open('README.md').read(),
+    description='Easy to open xls file and edit it (merge xlrd and xlutils)',
+    long_description=open('README.md', encoding='utf8').read(),
+    long_description_content_type="text/markdown",
     author='TaoJY',
     author_email='taojy123@163.com',
     maintainer='TaoJY',
